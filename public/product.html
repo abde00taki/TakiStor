@@ -80,6 +80,26 @@
 
     <h1>Liste des Produits</h1>
     <div id="products-container"></div>
+
+    <!-- داخل <body> -->
+<div class="container mt-5">
+    <h2>إضافة منتج جديد</h2>
+    <form id="addProductForm">
+      <div class="mb-3">
+        <label for="productName" class="form-label">اسم المنتج</label>
+        <input type="text" class="form-control" id="productName" required>
+      </div>
+      <div class="mb-3">
+        <label for="productPrice" class="form-label">السعر</label>
+        <input type="number" class="form-control" id="productPrice" required>
+      </div>
+      <div class="mb-3">
+        <label for="productImage" class="form-label">رابط الصورة (اختياري)</label>
+        <input type="text" class="form-control" id="productImage">
+      </div>
+      <button type="submit" class="btn btn-success">إضافة</button>
+    </form>
+  </div>
   
     <script src="script.js"></script>
 

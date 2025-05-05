@@ -4,46 +4,8 @@ const products = require('./data.js');
 
 const app = express();
 app.use(cors());
-
-const produi = [
-  { 
-      id: 1, 
-      name: 'taki',
-      titele: 'toni naruto',
-      size: 'S M L XL XXL',
-      color: 'black white blue',
-      price: '300DH'
-  },
-  { 
-      id: 2, 
-      name: 'abde',
-      titele: 'toni lofi',
-      size: 'M L XL XXL',
-      color: 'black white ',
-      price: '300DH'
-  },
-  { 
-      id: 3, 
-      name: 'abdo',
-      titele: 'toni humter',
-      size: 'S M L XL XXL',
-      color: 'black white red',
-      price: '300DH'
-  },
-  { 
-      id: 4, 
-      name: 'abd',
-      titele: 'toni detnote',
-      size: 'S M L XL XXL',
-      color: 'black white blue',
-      price: '300DH'
-  },   
-];
-
-
-app.get('/produi', (req, res) => {
-  res.json(produi);
-})
+// Middleware لتحليل بيانات JSON من الطلبات
+app.use(express.json());
 
 
 // Définir une route GET
@@ -67,15 +29,55 @@ app.get('/products/:id', (req, res) => {
 });
 
 
-app.delete('/delete', (req, res) => {
-  res.send('delete  hello world');
-});
+app.delete('/products/:id', (req, res) => {
+  const id = parseInt(req.params.id); // نحصل على رقم الـ id من الرابط
+  const index = products.findIndex(item => item.id === id); // نبحث عن العنصر
 
-app.post('/post', (req, res) => {
-  res.send('post');
+  if (index === -1) {
+    // إذا لم نجده
+    return res.status(404).send({ message: 'Formation non trouvée' });
+  }
+
+  products.splice(index, 1); // نحذف العنصر من القائمة
+  res.send({ message: 'Formation supprimée avec succès' });
+});
+  
+
+// مسار POST لإضافة منتج جديد
+app.post('/api/products', (req, res) => {
+  const { name, price, image } = req.body; // البيانات المرسلة من النموذج
+
+  // 1. التحقق من وجود البيانات المطلوبة
+  if (!name || !price) {
+    return res.status(400).json({ error: 'الاسم والسعر مطلوبان' });
+  }
+
+  // 2. إنشاء منتج جديد
+  const newProduct = {
+    id: products.length + 1, // إنشاء ID تلقائي
+    name,
+    price: Number(price),
+    image: image || '/images/default.jpg' // صورة افتراضية إذا لم تُحدد
+  };
+
+  // 3. إضافة المنتج للمصفوفة
+  products.push(newProduct);
+
+  // 4. إرسال الرد بنجاح العملية
+  res.status(201).json(newProduct);
 });
 
 // Démarrer le serveur
 app.listen(3000, () => {
   console.log('Serveur démarré sur http://localhost:3000');
 });
+
+
+
+
+
+
+
+
+
+
