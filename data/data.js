@@ -3,7 +3,7 @@ const products = [
     { 
         id: 1, 
         img: 'naruto.png',
-        titele: 'toni naruto',
+        titele: 'T-naruto',
         size: 'S M L XL XXL',
         color: 'black white blue',
         price: '300DH', 
@@ -13,7 +13,7 @@ const products = [
     {  
         id: 2, 
         img: 'onepice.jpeg',
-        titele: 'toni lofi',
+        titele: 'T-one pice',
         size: 'M L XL XXL',
         color: 'black white ',
         price: '300DH'
@@ -22,7 +22,7 @@ const products = [
     { 
         id: 3,
         img: 'hunter.jpeg',
-        titele: 'toni humter',
+        titele: 'T-humter',
         size: 'S M L XL XXL',
         color: 'black white red',
         price: '300DH'
@@ -30,7 +30,25 @@ const products = [
     { 
         id: 4, 
         img: 'detnote.webp',
-        titele: 'toni detnote',
+        titele: 'T-detnote',
+        size: 'S M L XL XXL',
+        color: 'black white blue',
+        price: '300DH'
+
+    },   
+    { 
+        id: 5, 
+        img: 'bobmarly.webp',
+        titele: 'T-bob marly',
+        size: 'S M L XL XXL',
+        color: 'black white blue',
+        price: '300DH'
+
+    },   
+    { 
+        id: 6, 
+        img: 'danger.webp',
+        titele: 'T-breaking bad',
         size: 'S M L XL XXL',
         color: 'black white blue',
         price: '300DH'
