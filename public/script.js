@@ -4,12 +4,10 @@ fetch('http://localhost:3000/products/all')
         const container = document.getElementById('products-container');
         data.forEach(product => {
           const div = document.createElement('div');
-          div.className = 'product col-md-4 w-100';
+          div.className = 'product mx-2 mt-4 col-md-3 card';
+          div.id = "product-"+product.id
           div.innerHTML = `
-            <h2>${product.titele || ''}</h2>
-            <p>${product.color || ''}</p>
-            <p>${product.size || ''}</p>
-            <p>Prix: ${product.price || 'N/A'}</p>
+            <a href="/show-prooduct/${product.id}"> <img class="w-100" src="emage/${product.img}" alt="image"/> </a>
           `;
           container.appendChild(div);
         });

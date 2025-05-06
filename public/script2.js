@@ -1,86 +1,20 @@
-
-// async function fetchProducts() {
-//     try {
-//       const response = await fetch('http://localhost:3000/api/products');
-//       if (!response.ok) throw new Error('فشل في جلب البيانات');
-//       const products = await response.json();
-//       displayProducts(products);
-//     } catch (error) {
-//       console.error('Error:', error);
-//       alert('حدث خطأ أثناء جلب المنتجات');
-//     }
-//   }
-  
-  
-//   function displayProducts(products) {
-//     const container = document.getElementById('products-container');
-//     if (!container) {
-//       console.error('العنصر products-container غير موجود في الصفحة');
-//       return;
-//     }
-//     container.innerHTML = '';
-  
-//     products.forEach(product => {
-//       const card = `
-//         <div class="col-md-4 mb-4">
-//           <div class="card h-100">
-//             <img src="${product.image || '/images/default.jpg'}" class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
-//             <div class="card-body">
-//               <h5 class="card-title">${product.name}</h5>
-//               <p class="card-text">السعر: $${product.price}</p>
-//               <button class="btn btn-primary">إضافة إلى السلة</button>
-//             </div>
-//           </div>
-//         </div>
-//       `;
-//       container.innerHTML += card;
-//     });
-//   }
-  
-//   async function addProduct(productData) {
-//     try {
-//       const response = await fetch('http://localhost:3000/api/products', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(productData)
-//       });
-  
-//       if (!response.ok) {
-//         const errorData = await response.json();
-//         throw new Error(errorData.error || 'فشل في إضافة المنتج');
-//       }
-  
-//       return await response.json();
-//     } catch (error) {
-//       console.error('Error:', error);
-//       throw error; 
-//     }
-//   }
-  
-//   document.addEventListener('DOMContentLoaded', () => {
-//     fetchProducts(); 
-  
-//     const form = document.getElementById('addProductForm');
-//     if (form) {
-//       form.addEventListener('submit', async (e) => {
-//         e.preventDefault();
-  
-//         const product = {
-//           name: document.getElementById('productName').value.trim(),
-//           price: parseFloat(document.getElementById('productPrice').value),
-//           image: document.getElementById('productImage').value.trim() || undefined
-//         };
-  
-//         try {
-//           await addProduct(product);
-//           alert('تمت إضافة المنتج بنجاح!');
-//           form.reset(); 
-//           fetchProducts(); 
-//         } catch (error) {
-//           alert(error.message);
-//         }
-//       });
-//     }
-//   });
+fetch('http://localhost:3000/Hommes/all')
+    .then(response => response.json())
+    .then(data => {
+        const container = document.getElementById('Hommes-container');
+        data.forEach(Homme => {
+        const div = document.createElement('div');
+        div.className = 'product mx-2 col-md-3 card';
+        div.id = "product-"+Homme.id
+        div.innerHTML = `
+        
+        <h1 class="text-primary"> ${Homme.nom}</h1>
+        <h3 class="text-primary"> ${Homme.color}</h3>
+        <h3 class="text-primary"> ${Homme.size}</h3>
+        `;
+        container.appendChild(div);
+        });
+    })
+    .catch(error => {
+        console.error('Erreur :', error);
+    });

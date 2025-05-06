@@ -1,7 +1,8 @@
 const cors = require('cors');
 const express = require('express');
-const products = require('./data/data.js');
-const path = require('path')
+const {products, Hommes} = require('./data/data.js');
+const path = require('path');
+// const Hommes = require('./data/data.js');
 
 const app = express();
 app.use(cors());
@@ -11,19 +12,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-// Définir une route GET
+// hna kan3yto 3la page index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
 });
-
+//  hna can3yto 3la page li ghan7to fiha lproducts
 app.get('/products', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'product.html'))
 });
-
+// hna kan3tyo 3la lproducts
 app.get('/products/all', (req, res) => {
   res.json(products)
 });
-
+//  hna can3yto 3la page li ghan7to fiha hommes
+app.get('/Hommes', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'Hommes.html'))
+}) 
+// hna kan3tyo 3la lproducts
+app.get('/hommes/all', (req, res) => {
+  res.json(Hommes);
+})
 app.get('/products/:id', (req, res) => {
   const productId = parseInt(req.params.id);
   const product = products.find(item => item.id === productId);
