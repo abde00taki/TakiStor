@@ -42,7 +42,7 @@ app.get('/products/:id', (req, res) => {
     res.json(product);
   }
 });
-
+  
 
 app.delete('/products/:id', (req, res) => {
   const id = parseInt(req.params.id); 
@@ -57,23 +57,14 @@ app.delete('/products/:id', (req, res) => {
 });
   
 
-app.post('/api/products', (req, res) => {
-  const { name, price, image } = req.body; 
+app.get('/product-details/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'product-details.html'))
+}) 
 
-  if (!name || !price) {
-    return res.status(400).json({ error: 'الاسم والسعر مطلوبان' });
-  }
 
-  const newProduct = {
-    id: products.length + 1, 
-    name,
-    price: Number(price),
-    image: image || '/images/default.jpg' 
-  };
-
-  products.push(newProduct);
-
-  res.status(201).json(newProduct);
+app.get('/product-details/:nom', (req, res) => {
+  const nom = req.params.nom
+res.send(`Bonjour ${nom}`);
 });
 
 app.listen(3000, () => {
