@@ -2,7 +2,8 @@
 const products = [
     { 
         id: 1, 
-        img: 'naruto.png',
+        img: 'naruto-back.png',
+        img2: 'naruto2',
         titele: 'T-naruto',
         size: 'S M L XL XXL',
         color: 'black white blue',
