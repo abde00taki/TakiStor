@@ -1,82 +1,51 @@
 const cors = require('cors');
 const express = require('express');
-const {products, Hommes} = require('./data/data.js');
+const { products } = require('./data/data.js');
 const path = require('path');
-// const Hommes = require('./data/data.js');
 
 const app = express();
 app.use(cors());
-// Middleware لتحليل بيانات JSON من الطلبات
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-// hna kan3yto 3la page index.html
+// Page d'accueil
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-//  hna can3yto 3la page li ghan7to fiha lproducts
+
+// Page des produits
 app.get('/products', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'product.html'))
+  res.sendFile(path.join(__dirname, 'public', 'product.html'));
 });
-// hna kan3tyo 3la lproducts
+
+// API: Tous les produits
 app.get('/products/all', (req, res) => {
-  res.json(products)
+  res.json(products);
 });
-//  hna can3yto 3la page li ghan7to fiha hommes
-app.get('/Hommes', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Hommes.html'))
-}) 
-// hna kan3tyo 3la lproducts
-app.get('/hommes/all', (req, res) => {
-  res.json(Hommes);
-})
-app.get('/products/:id', (req, res) => {
-  const productId = parseInt(req.params.id);
-  const product = products.find(item => item.id === productId);
-  
-  if (!product) {
-    return res.status(404).send({message: 'product not found'});
-  }else {
-    res.json(product);
-  }
-});
-  
 
-app.delete('/products/:id', (req, res) => {
-  const id = parseInt(req.params.id); 
-  const index = products.findIndex(item => item.id === id);  
-
-  if (index === -1) {
-    return res.status(404).send({ message: 'Formation non trouvée' });
-  }
-
-  products.splice(index, 1); 
-  res.send({ message: 'Formation supprimée avec succès' });
-});
-  
-
+// Page de détails
 app.get('/product-details/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'product-details.html'))
-}) 
-
-
-app.get('/product-details/:nom', (req, res) => {
-  const nom = req.params.nom
-res.send(`Bonjour ${nom}`);
+  res.sendFile(path.join(__dirname, 'public', 'product-details.html'));
 });
 
+// API: Un seul produit selon ID
+app.get('/products/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const product = products.find(p => p.id === id);
+
+  if (!product) {
+    return res.status(404).send({ message: 'Produit introuvable' });
+  }
+
+  res.send(product);
+});
+
+
+app.get('/product-details', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'product-details.html'));
+});
+
+// Démarrage du serveur
 app.listen(3000, () => {
   console.log('Serveur démarré sur http://localhost:3000');
 });
-
-
-
-
-
-
-
-
-
-

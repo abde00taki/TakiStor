@@ -19,7 +19,7 @@ fetch('http://localhost:3000/products/all')
       
 
 
-    //   function showProduct(productId) {
+    //   function showProduct(productId) {vv
     //     const product = products.find(p => p.id === productId);
     //     const sidebar = document.getElementById('zone-cards');
         

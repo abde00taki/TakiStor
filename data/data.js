@@ -22,7 +22,7 @@ const products = [
     { 
         id: 3,
         img: 'hunter.jpeg',
-        titele: 'T-humter',
+        titele: 'T-hunter',
         size: 'S M L XL XXL',
         color: 'black white red',
         price: '300DH'

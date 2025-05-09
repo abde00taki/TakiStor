@@ -1,14 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product details</title>
-</head>
-<body>
-    <h1>hello world</h1>
-    <div id="product-container"></div>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Détails du produit</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    
+      <div class="row">
+        <div class="col-md-4 vh-100 bg-dark">
+            <div id="product-container" class=""></div>
+        </div>
+        <div class="col-md-8 g-2 mt-4">
+            <!-- <div class="row d-flex justify-content-center g-2 my-3" id="products-container"></div> -->
+            
+        </div>
+    </div>
+    
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const url = window.location.href;
+        const parts = url.split("/"); // Split the URL into parts by "/"
+        const productId = parts.splice(-1)[0];
 
-    <script src="script3.js"></script>
-</body>
+        fetch(`http://localhost:3000/products/${productId}`)
+          .then((res) => res.json())
+          .then((product) => {
+            console.log("image de produit : "+product.img);
+            
+            const container = document.getElementById("product-container");
+            const div = document.createElement("div");
+            div.className = "product mx-2 mt-4 card";
+            // div.id = "product-"+product.id
+            div.innerHTML = `
+            <img class="w-100"src="/emage/${product.img}" alt="image"/> </a>
+            <h2 class="text-center">  ${product.titele} </h2>
+            <h2 class="text-center">  ${product.size} </h2>
+            <h2 class="text-center">  ${product.color} </h2>
+            <h2 class="text-center">  ${product.price} </h2>
+          `;
+            container.appendChild(div);
+          })
+          .catch((error) => {
+            console.log("failed to get the product with id ", productId);
+            console.log("details of the error : ", error);
+          });
+      });
+    </script>
+    <!-- <script src="script3.js"></script> -->
+  </body>
 </html>
