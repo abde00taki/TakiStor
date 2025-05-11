@@ -23,7 +23,7 @@ const products = [
     },
     { 
         id: 3,
-        img: 'hunter.jpeg',
+        img: 'hunter.png',
         titele: 'T-hunter',
         size: 'S M L XL XXL',
         color: 'black white red',
@@ -31,7 +31,7 @@ const products = [
     },
     { 
         id: 4, 
-        img: 'detnote.webp',
+        img: 'detnote.png',
         titele: 'T-detnote',
         size: 'S M L XL XXL',
         color: 'black white blue',
@@ -49,7 +49,7 @@ const products = [
     },   
     { 
         id: 6, 
-        img: 'danger.webp',
+        img: 'danger.png',
         titele: 'T-breaking bad',
         size: 'S M L XL XXL',
         color: 'black white blue',
