@@ -13,6 +13,12 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Page d'accueil
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin/index.html'));
+});
+
+
 // Page des produits
 app.get('/products', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'product.html'));
@@ -44,6 +50,12 @@ app.get('/products/:id', (req, res) => {
 app.get('/product-details', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'product-details.html'));
 });
+
+app.post('/admin', (req, res) => {
+  console.log(req.body.title);
+  res.json({message: 'succes'});
+  
+})
 
 // Démarrage du serveur
 app.listen(3000, () => {
