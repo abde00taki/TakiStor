@@ -10,6 +10,34 @@
     <!-- Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        .information {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .information.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .img-parfum {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .img-parfum.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .img-parfum:hover {
+            transform: scale(0.9);
+
+
+        }
+
         .img-style {
 
             opacity: 0;
@@ -27,6 +55,7 @@
             transition: transform 0.3s ease-in-out;
             box-shadow: 0 0 8px black;
             transform: scale(1.1);
+
         }
 
         .card-shadaw {
@@ -58,8 +87,8 @@
     </style>
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark w-100"
+<body style="background-color: black;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100"
         style="position: fixed; z-index: 900; margin-bottom: 30px;">
         <div class="container">
             <!-- Brand à gauche -->
@@ -104,7 +133,23 @@
     <section>
         <script>
             window.addEventListener('load', () => {
-                const images = document.querySelectorAll('.img-style');
+                const images = document.querySelectorAll('.img-style',);
+                images.forEach((img, index) => {
+                    setTimeout(() => {
+                        img.classList.add('show');
+                    }, index * 500); //hadi kat2kher kola tswira 3la lkhra b 0.5s
+                })
+            })
+            window.addEventListener('scroll', () => {
+                const images = document.querySelectorAll('.img-parfum');
+                images.forEach((img, index) => {
+                    setTimeout(() => {
+                        img.classList.add('show');
+                    }, index * 500); //hadi kat2kher kola tswira 3la lkhra b 0.5s
+                })
+            })
+            window.addEventListener('scroll', () => {
+                const images = document.querySelectorAll('.information');
                 images.forEach((img, index) => {
                     setTimeout(() => {
                         img.classList.add('show');
@@ -115,14 +160,14 @@
         <!-- <div style="background-color: #212529; z-index: 10000; height: 100%  ;"> -->
         <div style="background-image: url(img/background-home1.jpg);  " class=" w-100 vh-50 ">
             <div class="d-flex justify-content-center align-items-center vh-50 w-100"
-                style="background: linear-gradient(to top, rgba(8, 0, 255, 0.368), rgba(0, 0, 0, 0.769));  flex-direction: column;">
+                style="background: linear-gradient(to top, rgba(8, 0, 255, 0.621), rgba(0, 0, 0, 0.769));  flex-direction: column;">
                 <h1 class="" style="font-size: 100px; text-shadow: 0 0 6px rgb(0, 0, 0);color: #fefeff1c;">TAKI STOR
                 </h1>
                 <div class="row mt-4">
                     <div class="col-md">
                         <!-- <div class="mt-4"> -->
                         <p style="z-index: -500;">TakiStor</p>
-                        <div class="card card-shadaw mt-4 position-relative"
+                        <div class="card card-shadaw mt-4 "
                             style="width: 18rem;  background: transparent; margin-top: -40px; position: relative;">
 
                             <a href="http://localhost:3000/products"><img class="card-img img-style"
@@ -158,27 +203,162 @@
             </div>
         </div>
     </section>
-
-    <section class="mt-2">
+    <!-- <hr style="margin: 0;"> -->
+    <section class="mb-4" style="background: linear-gradient(to top, black, rgba(0, 0, 255, 0.836)); ">
         <div class="container">
-            <div class="card-group">
-                <div class="card d-flex">
-                    <img class="card-img " src="img/parfum1.jpeg" alt="Card image cap" style="height: 400px; width: 75%;">
+            <div class="row">
+                <div class="col" margin="0">
+                    <div class="w-100 bg-dark img-parfum"
+                        style="height: 400px;  box-shadow: 0 0 20px whitesmoke; background-image: url(img/parfum-femme.jpg); background-size: cover;">
+
+                    </div>
                 </div>
-                <div class="card">
-                    <img class="card-img" src="img/parfum-femme.jpg" alt="Card image cap" style="height: 400px; width: 75%;">
+                <div class="col">
+                    <div class="w-100 bg-dark img-parfum"
+                        style="height: 400px;  box-shadow: 0 0 20px whitesmoke; background-image: url(img/parfum.jpeg); background-size: cover;">
+
+                    </div>
                 </div>
             </div>
-            <div class="card-group">
-                <div class="card" style="width: 75%;">
-                    <img class="card-img" src="img/parfum-brhown.avif" alt="Card image cap">
+            <div class="row ">
+                <div class="col mt-2">
+                    <div class="w-100 vh-75 bg-dark img-parfum"
+                        style="height: 400px;  box-shadow: 0 0 20px whitesmoke; background-image: url(img/parfum1.jpeg);background-size: cover;">
+
+                    </div>
                 </div>
-                <div class="card" style="width: 75%;">
-                    <img class="card-img" src="img/parfum-femme.jpg" alt="Card image cap">
+                <div class="col mt-2">
+                    <div class="w-100 vh-75 bg-dark img-parfum"
+                        style="height: 400px;  box-shadow: 0 0 20px whitesmoke; background-image: url(img/parfum-femme3.png); background-size: cover;">
+
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section style="background: linear-gradient(to top, blue, black )">
+        <div class="d-flex justify-content-center">
+            <div class="row mt-4">
+                <div class="col-sm">
+                    <div class="card mx-4 mt-4 information" style="width: 18rem; box-shadow: 0 0 8px white;">
+                        <div class="d-flex justify-content-center">
+                            <img style="width: 64px;" src="img/phone.png" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the card's content.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card mx-4 mt-4 information" style="width: 18rem; box-shadow: 0 0 8px white;">
+                        <div class="d-flex justify-content-center">
+                            <img style="width: 64px;" src="img/shop-onlin.png" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the card's content.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card mx-4 mt-4 information" style="width: 18rem; box-shadow: 0 0 8px white;">
+                        <div class="d-flex justify-content-center">
+                            <img style="width: 64px;" src="img/true.png" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the card's content.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card mx-4 mt-4 information" style="width: 18rem; box-shadow: 0 0 8px white;">
+                        <div class="d-flex justify-content-center">
+                            <img style="width: 64px;" src="img/livrer.png" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of
+                                the card's content.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+        <section class="mb-4" style="background: linear-gradient(to top, black, blue ); margin-top: 0;" >
+        <div class="container ">
+            <div class="d-flex justify-content-center">
+                <div class="row mt-4">
+                    <div class="col-md mt-4">
+                        <div class="mt-4" style="top: 40px;">
+                            <h2 class="text-light">chri lik ou ls7abek</h2>
+                            <ul class="text-light">
+                                <li type="none" class="mt-4" style="font-size: 30px;"><img style="width: 64px;" src="img/phone.png" alt="">Lorem ipsum dolor sit.</li>
+                                <li type="none" class="mt-4" style="font-size: 30px;"><img style="width: 64px;" src="img/shop-onlin.png" alt="">Lorem ipsum dolor sit.</li>
+                                <li type="none" class="mt-4" style="font-size: 30px;"><img style="width: 64px;" src="img/true.png" alt="">Lorem ipsum dolor sit.</li>
+                                <li type="none" class="mt-4" style="font-size: 30px;"> <img style="width: 64px;" src="img/livrer.png" alt="">Lorem ipsum dolor sit.</li>
+                            </ul>
+                            <div class="d-flex justify-content-center mt-4">
+                                <button class="btn w-75 text-light" style="background-color: rgb(249, 115, 115);"> <span style="font-size: 20px;">go to shop</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md mt-4">
+                        <img src="img/shoping.jpeg" style="height: 500px; border-radius: 15px;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <hr  style="color: #f8f9fa; margin: 0;">
+    <footer style="background-color: black; height: 300px;">
+       <div class="row">
+        <div class="col-4 mt-4">
+            <ul class="text-light">
+                <li class="mt-4" type="none" style="font-size: 25px;"><img src="img/whatsapp.png" alt="">+2126060606</li>
+                <li class="mt-4" type="none" style="font-size: 25px;"><img src="img/fix.png" alt=""> 05 834 321</li>
+                <li class="mt-4" type="none" style="font-size: 25px;"><img src="img/email.png" alt=""> TakiStor@gmail.com</li>
+                <li class="mt-4" type="none" style="font-size: 25px;"><img src="img/localisation.png" alt=""> localisation</li>
+            </ul>
+        </div>
+        <div class="col-4 mt-4">
+            <ul class="text-light mt-4">
+                <li class="mt-4" type="none" style="font-size: 25px;">Lorem ipsum dolor sit amet.</li>
+                <li class="mt-4" type="none" style="font-size: 25px;">Lorem ipsum dolor sit amet.</li>
+                <li class="mt-4" type="none" style="font-size: 25px;">Lorem ipsum dolor sit amet.</li>
+                <li class="mt-4" type="none" style="font-size: 25px;">Lorem ipsum dolor sit amet.</li>
+            </ul>
+        </div>
+        <div class="col-4">
+            <div class="d-flex justify-content-center align-items-center" style="height: 300px;">
+                <h3 class="text-light" style="font-size: 120px;">   TakiStor</h3>
+            </div>
+        </div>      
+        
+       </div>
+    </footer>
+   
 
 
 
