@@ -89,10 +89,45 @@
             <div class="row d-flex justify-content-center g-2 my-3" id="products-container">
                 
             </div>
+            <div class="container w-50" style="border: 2px solid black; border-radius: 15px; padding: 15px;">
+                <div class="form" id="product-form">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">add title the product</label>
+                        <input type="text" class="form-control" id="title" placeholder="Example input placeholder">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">add price the product</label>
+                        <input type="number" class="form-control" id="price" placeholder="Another input placeholder">
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">add product</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
+ <script>
+        const form = document.getElementById('product-form')
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
 
+            const title = document.getElementById('title').value
+            const price = document.getElementById('price').value
+          
+            const newProduct = { title, price }
+            console.log(newProduct);
+
+            fetch('http://localhost:3000/products', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(newProduct)
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.error('Error:', err));
+        })
+    </script>
 
 
     <script src="script.js"></script>

@@ -1,45 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
-        crossorigin="anonymous"
-    ></script>
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
-        crossorigin="anonymous"
-    />
-    </head>
-    <body>
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous" />
+</head>
+
+<body>
     <div class="row">
         <div class="col-md-3 bg-dark vh-100">
             <h1 style="text-align: center; " class="text-light mt-3">admin</h1>
             <hr class="text-light">
             <div class="sidbar">
-                    <ul class="text-light" >
-                        <li  type="none" ><a href="" class="btn btn-light w-100">POST</a></li>
-                        <li type="none"><a href="" class="btn btn-light w-100 mt-3">DELET</a></li>
-                        <li type="none"><a href="" class="btn btn-light w-100 mt-3" >APDET</a></li>
-                    </ul>
+                <ul class="text-light">
+                    <li type="none"><a href="" class="btn btn-light w-100">POST</a></li>
+                    <li type="none"><a href="" class="btn btn-light w-100 mt-3">DELET</a></li>
+                    <li type="none"><a href="" class="btn btn-light w-100 mt-3">APDET</a></li>
+                </ul>
             </div>
         </div>
-        <div class="col-md-3">
-            
-            <div class="mb-3">
-  <label for="formGroupExampleInput" class="form-label">Example label</label>
-  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
-</div>
-<div class="mb-3">
-  <label for="formGroupExampleInput2" class="form-label">Another label</label>
-  <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
-</div>
+        <div class="col-md-9">
+
+            <div class="container w-50" style="border: 2px solid black; border-radius: 15px; padding: 15px;">
+                <div class="form" id="product-form">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">add title the product</label>
+                        <input type="text" class="form-control" id="title" placeholder="Example input placeholder">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">add price the product</label>
+                        <input type="number" class="form-control" id="price" placeholder="Another input placeholder">
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">add product</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </body>
+
+    <script>
+        const form = document.getElementById('product-form')
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            const title = document.getElementById('title').value
+            const price = document.getElementById('price').value
+            // const description = document.getElementById('description').value
+
+            const newProduct = { title, price }
+            console.log(newProduct);
+
+            fetch('/admin', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(newProduct)
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(err => console.error('Error:', err));
+        })
+    </script>
+</body>
+
 </html>

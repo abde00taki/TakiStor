@@ -3,11 +3,13 @@ const express = require('express');
 const { products } = require('./data/data.js');
 const path = require('path');
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
+const app = express();
+
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 // Page d'accueil
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -51,9 +53,16 @@ app.get('/product-details', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'product-details.html'));
 });
 
-app.post('/admin', (req, res) => {
-  console.log(req.body.title);
-  res.json({message: 'succes'});
+app.get('/Hommes', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'Hommes.html'))
+})
+
+app.post('/products', (req, res) => {
+   const newProduct = req.body;
+    products.id = products.length + 1;  
+    products.push(newProduct);
+    console.log(newProduct);
+    res.json({ success: true, product: newProduct });
   
 })
 
