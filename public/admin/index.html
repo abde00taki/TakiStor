@@ -46,26 +46,26 @@
     </div>
 
     <script>
-        const form = document.getElementById('product-form')
-        form.addEventListener('submit', (e) => {
-            e.preventDefault()
+       document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('product-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const title = document.getElementById('title').value;
+        const price = document.getElementById('price').value;
 
-            const title = document.getElementById('title').value
-            const price = document.getElementById('price').value
-            // const description = document.getElementById('description').value
+        const newProduct = { title, price };
+        console.log(newProduct);
 
-            const newProduct = { title, price }
-            console.log(newProduct);
-
-            fetch('/admin', {
-                method: 'POST',
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify(newProduct)
-            })
-                .then(res => res.json())
-                .then(data => console.log(data))
-                .catch(err => console.error('Error:', err));
+        fetch('http://localhost:3000/products', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newProduct)
         })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.error('Error:', err));
+    });
+});
     </script>
 </body>
 

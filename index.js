@@ -59,7 +59,7 @@ app.get('/Hommes', (req, res) => {
 
 app.post('/products', (req, res) => {
    const newProduct = req.body;
-    products.id = products.length + 1;  
+    newProduct.id = products.length + 1;  
     products.push(newProduct);
     console.log(newProduct);
     res.json({ success: true, product: newProduct });
