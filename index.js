@@ -1,6 +1,6 @@
 const cors = require('cors');
 const express = require('express');
-const { products } = require('./data/data.js');
+const { products, hats } = require('./data/data.js');
 const path = require('path');
 
 
@@ -30,6 +30,20 @@ app.get('/products', (req, res) => {
 app.get('/products/all', (req, res) => {
   res.json(products);
 });
+// hado les page dyal casket
+app.get('/hat', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'hat.html'))
+})
+app.get('/hat-details', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'hat-details.html'))
+})
+app.get('/hat-details/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'hat-details.html'))
+})
+app.get('/hats/all', (req, res) => {
+  res.json(hats);
+});
+
 
 // Page de détails
 app.get('/product-details/:id', (req, res) => {
@@ -46,6 +60,16 @@ app.get('/products/:id', (req, res) => {
   }
 
   res.send(product);
+});
+app.get('/hats/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const  hat = hats.find(p => p.id === id);
+
+  if (!hat) {
+    return res.status(404).send({ message: 'Produit introuvable' });
+  }
+
+  res.send(hat);
 });
 
 

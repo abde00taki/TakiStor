@@ -1,4 +1,4 @@
-fetch('http://localhost:3000/products/all')
+fetch('http://localhost:3000/hats/all')
       .then(response => response.json())
       .then(data => {
         const container = document.getElementById('products-container');
@@ -7,8 +7,8 @@ fetch('http://localhost:3000/products/all')
           div.className = 'product mx-2 mt-4 col-md-3 card';
           div.id = "product-"+product.id
           div.innerHTML = `
-            <a href="/product-details/${product.id}"> <img class="w-100"src="emage/${product.img}" alt="image"/> </a>
-            <h6 class="text-center">  ${product.price} </h6>
+            <a href="/hat-details/${product.id}"> <img class="w-100"src="emage/${product.photo}" alt="image"/> </a>
+            <h6 class="text-center">  ${product.prix} </h6>
           `;
           container.appendChild(div);
         });
@@ -17,4 +17,3 @@ fetch('http://localhost:3000/products/all')
         console.error('Erreur :', error);
       });
       
-

@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const parts = url.split("/"); // Split the URL into parts by "/"
   const productId = parts.splice(-1)[0];
 
-  fetch(`http://localhost:3000/products/${productId}`)
+  fetch(`http://localhost:3000/hats/${productId}`)
     .then((res) => res.json())
     .then((product) => {
-      console.log("image de produit : " + product.img);
+      console.log("image de produit : " + product.photo);
 
       const container = document.getElementById("product-container");
       const div = document.createElement("div");
@@ -16,13 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
             <div id="carouselExampleControlsNoTouching" class="carousel slide bg-dark" data-bs-touch="false" style="border: 1px solid whitesmoke; border-radius: 10px; box-shadow: 0 0 8px white; ">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/emage/${product.img}" class="d-block w-100" style="background-image: url(/img/orang.png);" alt="...">
+      <img src="/emage/${product.photo}" class="d-block w-100" style="background-image: url(/img/orang.png);" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="/emage/${product.img2}" class="d-block w-100" style="background-image: url(/img/brown.png);"  alt="...">
+      <img src="/emage/${product.photo}" class="d-block w-100" style="background-image: url(/img/brown.png);"  alt="...">
     </div>
     <div class="carousel-item">
-      <img src="/emage/${product.img3}" class="d-block w-100" style="background-image: url(/img/red.png);"  alt="...">
+      <img src="/emage/${product.photo}" class="d-block w-100" style="background-image: url(/img/red.png);"  alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
@@ -35,10 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
   </button>
   <div class="row mt-2">
            <div class="col">
-            <h2 class="text-center text-light">  ${product.titele} </h2>
+            <h2 class="text-center text-light">  ${product.title} </h2>
            </div>
            <div class="col">
-            <h2 class="text-center text-light">  ${product.price} </h2>
+            <h2 class="text-center text-light">  ${product.prix} </h2>
            </div>
 </div>
            

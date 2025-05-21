@@ -8,9 +8,11 @@ fetch('http://localhost:3000/products/all')
         div.id = "product-"+Homme.id
         div.innerHTML = `
         
-        <h1 class="text-primary"> ${Homme.nom}</h1>
+        
         <h3 class="text-primary"> ${Homme.color}</h3>
         <h3 class="text-primary"> ${Homme.size}</h3>
+        <h1 class="text-primary"> ${Homme.title}</h1>
+        
         `;
         container.appendChild(div);
         });
