@@ -60,10 +60,10 @@
         <!-- Liens au centre -->
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" href="/">Home</a>
+            <a class="nav-link " href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/products">Techort</a>
+            <a class="nav-link active" href="/products">Techort</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button"
@@ -71,7 +71,7 @@
               Categories
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/Hommes">Hommes</a></li>
+              <li><a class="dropdown-item" href="http://localhost:3000/hat">hat</a></li>
               <li><a class="dropdown-item" href="#">Femmes</a></li>
               <li><a class="dropdown-item" href="#">Enfants</a></li>
             </ul>
@@ -95,14 +95,22 @@
     <div class="col-md-8 g-2 mt-4">
       <div class="row d-flex justify-content-center g-2 my-3" id="products-container"></div>
       <!-- <div class="container w-50" style="border: 2px solid black; border-radius: 15px; padding: 15px"></div> -->
+         <!-- Button trigger modal -->
+          <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  add product +
+</button>
+          </div>
+
       
     </div>
   </div>
+  
   <footer class="mt-4" style="background: linear-gradient(to top, black, #0d6efd ); height: 300px; z-index: 1000px;">
        <div class="row" >
         <div class="col-4 " style="background: linear-gradient(to top, black, #0d6efd );">
             <ul class="text-light">
-                <li class="mt-4" type="none" style="font-size: 25px; "><img src="/img/whatsapp.png" alt="">+2126060606</li>
+                <li class="mt-4" type="none" style="font-size: 25px; "><img src="/img/whatsapp.png" alt="">+212629121938</li>
                 <li class="mt-4" type="none" style="font-size: 25px;"><img src="/img/fix.png" alt=""> 05 834 321</li>
                 <li class="mt-4" type="none" style="font-size: 25px;"><img src="/img/email.png" alt=""> TakiStor@gmail.com</li>
                 <li class="mt-4" type="none" style="font-size: 25px;"><img src="/img/localisation.png" alt=""> localisation</li>
@@ -126,8 +134,116 @@
     </footer>
 
   <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("product-form");
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const titele = document.getElementById("titele").value;
+          const price = document.getElementById("price").value;
+          const size = document.getElementById("size").value;
+          const color = document.getElementById("color").value;
+          const img = document.getElementById("img").value;
+          console.log(titele);
+          console.log(price);
 
-  </script>
+          const newProduct = { titele, price, size, color, img };
+          console.log(newProduct);
+
+          fetch("http://localhost:3000/products", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newProduct),
+          })
+            .then((res) => res.json())
+            .then((data) => { 
+                console.log('oroduct add !',data)
+                alert("product ");
+                window.location.href = '/products'
+            // .catch((err) => console.error("Error:", err));
+        
+            });
+        });
+      });
+    </script>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<form class="form" id="product-form">
+            <div class="mb-3">
+              <label for="formGroupExampleInput" class="form-label"
+                >add title the product</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="titele"
+                placeholder="Example input placeholder"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="formGroupExampleInput2" class="form-label"
+                >add price the product</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="price"
+                placeholder="Another input placeholder"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="formGroupExampleInput2" class="form-label"
+                >add size the product</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="size"
+                placeholder="Another input placeholder"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="formGroupExampleInput2" class="form-label"
+                >add color the product</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="color"
+                placeholder="Another input placeholder"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="formGroupExampleInput2" class="form-label"
+                >add image the product</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="img"
+                placeholder="Another input placeholder"
+              />
+            </div>
+            <div>
+              <button class="btn btn-primary" type="submit">add product</button>
+            </div>
+          </form>      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

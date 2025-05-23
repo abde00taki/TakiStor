@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
             </div>
             <div class="d-flex justify-content-center">
-            <button class="btn btn-primary mt-2 w-75">chop</button>
+            <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary mt-2 w-75">chop</button>
             </div>
         </div>
           </div>

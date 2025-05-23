@@ -67,7 +67,7 @@
                             Categories
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/Hommes">Hommes</a></li>
+                            <li><a class="dropdown-item" href="http://localhost:3000/hat">hat</a></li>
                             <li><a class="dropdown-item" href="#">Femmes</a></li>
                             <li><a class="dropdown-item" href="#">Enfants</a></li>
                         </ul>
@@ -101,7 +101,7 @@
        <div class="row">
         <div class="col-4 mt-4">
             <ul class="text-light">
-                <li class="mt-4" type="none" style="font-size: 25px;"><img src="/img/whatsapp.png" alt="">+2126060606</li>
+                <li class="mt-4" type="none" style="font-size: 25px;"><img src="/img/whatsapp.png" alt="">+212629121938</li>
                 <li class="mt-4" type="none" style="font-size: 25px;"><img src="/img/fix.png" alt=""> 05 834 321</li>
                 <li class="mt-4" type="none" style="font-size: 25px;"><img src="/img/email.png" alt=""> TakiStor@gmail.com</li>
                 <li class="mt-4" type="none" style="font-size: 25px;"><img src="/img/localisation.png" alt=""> localisation</li>
@@ -137,6 +137,17 @@
                     div.innerHTML = `
             <a href="/product-details/${product.id}"> <img class="w-100"src="/emage/${product.img}" alt="image"/> </a>
             <h6 class="text-center">  ${product.price} </h6>
+            <hr>
+           
+            <div class="d-flex justify-content-between">
+                <div class="">
+                   <a href="/update.html" class="btn btn-light" ><img src="/img/update.png"></a>
+                </div>
+                <div class="">
+                   <button class="btn btn-light" type="none"><img src="/img/delete.png"></button>
+                </div>
+            </div>
+           
           `;
                     container.appendChild(div);
                 });
@@ -146,6 +157,45 @@
             });
 
     </script>
+
+    <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">shop products</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">num de cont banc</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">shop</button>
+      </div>
+    </div>
+  </div>
+</div>
     <script src="/script3.js"></script>
 </body>
 
