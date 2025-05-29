@@ -51,19 +51,19 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="col">
             <div class="form-group">
                <select name="${product.size}" id="" class="form-select">
-                   <option value="${product.size}">S</option>
-                   <option value="${product.size}">M</option>
-                   <option value="${product.size}">L</option>
-                   <option value="${product.size}">XL</option>
+                   <option value="${product.s}">${product.s}</option>
+                   <option value="${product.m}">${product.m}</option>
+                   <option value="${product.l}">${product.l}</option>
+                   <option value="${product.xl}">${product.xl}</option>
                </select>
             </div>
           </div>
             <div class="col">
                  <div class="form-group">
                <select name="${product.color}" id="" class="form-select">
-                   <option value="${product.color}">BLACK</option>
-                   <option value="${product.color}">WHITE</option>
-                   <option value="${product.color}">RED</option>
+                   <option value="${product.black}">${product.black}</option>
+                   <option value="${product.white}">${product.white}</option>
+                   <option value="${product.red}">${product.red}</option>
                    
                </select>
             </div>

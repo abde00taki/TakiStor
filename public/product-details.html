@@ -141,10 +141,10 @@
            
             <div class="d-flex justify-content-between">
                 <div class="">
-                   <a href="/update.html" class="btn btn-light" ><img src="/img/update.png"></a>
+                   <a href="/update.html?id=${product.id}" class="btn btn-light" ><img src="/img/update.png"></a>
                 </div>
                 <div class="">
-                   <button class="btn btn-light" type="none"><img src="/img/delete.png"></button>
+                   <button onclick="supprimerFormation(${product.id})" class="btn btn-light" type="button"><img src="/img/delete.png"></button>
                 </div>
             </div>
            
@@ -156,12 +156,19 @@
                 console.error('Erreur :', error);
             });
 
-    </script>
+             function supprimerFormation(id) {
+      
+     fetch('http://localhost:3000/products/' + id, {
+        method: 'DELETE',
+      }).then(res => res.json())
+        .then(data => {
+          alert('DELET valide')
+          window.location.href = '/'
+        })
 
-    <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button> -->
+    }
+
+    </script>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

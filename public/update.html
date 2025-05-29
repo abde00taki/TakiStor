@@ -1,41 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>update</title>
-     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100">
+        <div class="container">
+            <!-- Brand à gauche -->
+            <a class="navbar-brand" href="#">TakiStor</a>
 
-    <div class="d-flex justify-content-center ">
-        <form action="" class="form">
-        <div class="form-group">
+            <!-- Bouton toggle pour mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Contenu de la navbar -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Liens au centre -->
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/products">Techort</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="http://localhost:3000/hat">hat</a></li>
+                            <li><a class="dropdown-item" href="#">Femmes</a></li>
+                            <li><a class="dropdown-item" href="#">Enfants</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- Bouton à droite -->
+                <div class="d-flex">
+                    <button class="btn btn-rejoindre">Rejoindre</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex justify-content-center">
+      <div class="container">
+        <form action="" class="form" id="updateForm">
+          <div class="form-group">
             <label for="">title the product</label>
-            <input class="form-control " type="text" id="title">
-        </div>
-        <div class="form-group">
+            <input class="form-control" type="text" id="titele" />
+          </div>
+          <div class="form-group">
             <label for="">price the product</label>
-            <input class="form-control" type="text" id="title">
-        </div>
-        <div class="form-group">
+            <input class="form-control" type="text" id="price" />
+          </div>
+          <div class="form-group">
             <label for="">color the product</label>
-            <input class="form-control" type="text" id="title">
-        </div>
-        <div class="form-group">
+            <input class="form-control" type="text" id="color" />
+          </div>
+          <div class="form-group">
             <label for="">size the product</label>
-            <input class="form-control" type="text" id="title">
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary">update</button>
-        </div>
-    </form>
+            <input class="form-control" type="text" id="size" />
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">update</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script>
+    const id = new URLSearchParams(window.location.search).get('id');
+    const formPut = document.getElementById('updateForm')
+    fetch('http://localhost:3000/products/'+id)
+      .then(res => res.json())
+      .then(product => {
+        document.getElementById('titele').value = product.titele
+        document.getElementById('price').value = product.price
+        document.getElementById('color').value = product.color
+        document.getElementById('size').value = product.size
+      })
 
-    </script>
-    
-</body>
+    formPut.addEventListener('submit', (e) => {
+      e.preventDefault();
+      confirm('do you want updet  product')
+      const newData = {
+        titele: document.getElementById('titele').value,
+        price: document.getElementById('price').value,
+        color: document.getElementById('color').value,
+        size: document.getElementById('size').value
+
+      }
+
+      fetch('http://localhost:3000/products/' + id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newData)
+      }).then(res => res.json())
+        .then(data => {
+          alert('modification valide')
+          window.location.href = '/'
+        })
+    })
+
+  </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
