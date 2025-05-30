@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ 
     storage: storage ,
-    limits: { fileSize: 2 * 1024 * 1024 } // Limite: 2MB
+    // limits: { fileSize: 2 * 1024 * 1024 } // Limite: 2MB
  })
 
 
@@ -96,7 +96,7 @@ app.post('/products', upload.single('img') ,(req, res) => {
 })
 
 // ============ UPDATE product by ID =============
-app.put('/products/:id', (req, res) => {
+app.put('/products/:id', upload.single('img') , (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(f => f.id === id);
 
@@ -106,8 +106,9 @@ app.put('/products/:id', (req, res) => {
   }
 
   // hna kantakdo mn l7wayj li ghaytbdlo
-  const { img, titele, size, color, price } = req.body;
-  if (img) product.img = img;
+  const { titele, size, color, price } = req.body;
+  const img = req.file;
+  if (img) product.img = img.filename;
   if (titele) product.titele = titele;
   if (size) product.size = size;
   if (color) product.color = color;
