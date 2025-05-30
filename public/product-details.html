@@ -137,16 +137,7 @@
                     div.innerHTML = `
             <a href="/product-details/${product.id}"> <img class="w-100"src="/emage/${product.img}" alt="image"/> </a>
             <h6 class="text-center">  ${product.price} </h6>
-            <hr>
-           
-            <div class="d-flex justify-content-between">
-                <div class="">
-                   <a href="/update.html?id=${product.id}" class="btn btn-light" ><img src="/img/update.png"></a>
-                </div>
-                <div class="">
-                   <button onclick="supprimerFormation(${product.id})" class="btn btn-light" type="button"><img src="/img/delete.png"></button>
-                </div>
-            </div>
+            
            
           `;
                     container.appendChild(div);

@@ -1,35 +1,56 @@
 const cors = require('cors');
+const multer = require('multer')
 const express = require('express');
 const { products, hats } = require('./data/data.js');
 const path = require('path');
+const PORT = 3000
 
 
 const app = express();
+
+// config Multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/emage/');
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+const upload = multer({ 
+    storage: storage ,
+    limits: { fileSize: 2 * 1024 * 1024 } // Limite: 2MB
+ })
+
+
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-// Page d'accueil
+
+// get home page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Page d'accueil
+// get page the admin
 app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin/index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'admin/post.html'));
 });
 
 
-// Page des produits
+// get page thr products
 app.get('/products', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'product.html'));
 });
 
-// API: Tous les produits
+// API: get all the products in json
 app.get('/products/all', (req, res) => {
   res.json(products);
 });
+
 // hado les page dyal casket
 app.get('/hat', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'hat.html'))
@@ -45,12 +66,12 @@ app.get('/hats/all', (req, res) => {
 });
 
 
-// Page de détails
+// Page the détails products
 app.get('/product-details/:id', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'product-details.html'));
 });
 
-// API: Un seul produit selon ID
+// API: get product by ID
 app.get('/products/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(p => p.id === id);
@@ -61,27 +82,30 @@ app.get('/products/:id', (req, res) => {
 
   res.send(product);
 });
-// hna mnach kanposte les products 
-app.post('/products', (req, res) => {
+
+// =============POST product by ID=========== 
+app.post('/products', upload.single('img') ,(req, res) => {
+  const image = req.file;
    const newProduct = req.body;
-    newProduct.id = products.length + 1;  
+    newProduct.id = products.length + 1; 
+    newProduct.img = image.filename; 
     products.push(newProduct);
     console.log(newProduct);
-    res.json({ success: true, product: newProduct });
+    res.json({ success: true, product: newProduct});
   
 })
 
-// han bach kn7edet product 
+// ============ UPDATE product by ID =============
 app.put('/products/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const product = products.find(f => f.id === id);
 
-  // Vérification de l'existence
+  // hna kantakdo wach dija 3ndna dak lproduct
   if (!product) {
     return res.status(404).json({ error: 'we dont have this product' });
   }
 
-  // Mise à jour des champs si fournis
+  // hna kantakdo mn l7wayj li ghaytbdlo
   const { img, titele, size, color, price } = req.body;
   if (img) product.img = img;
   if (titele) product.titele = titele;
@@ -91,22 +115,23 @@ app.put('/products/:id', (req, res) => {
 
   res.json(product);
 });
-//  mn hna mnach kanmse7 product 
+
+// ===========DELETE product by ID==============
 app.delete('/products/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const index = products.findIndex(f => f.id === id);
 
-  // Vérification de l'existence
+  // hna kantakdo wach 3ndna
   if (index === -1) {
     return res.status(404).json({ error: 'Formation non trouvée.' });
   }
 
-  // Suppression avec splice
+  // hna ba9i mafhmtoch mzyan db nrje3 lih
   const [deleted] = products.splice(index, 1);
   res.json({ message: 'Formation supprimée.', product: deleted });
 });
 
-// hna kanjib hat by id 
+// ========== GET hat by ID ============
 app.get('/hats/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const  hat = hats.find(p => p.id === id);
@@ -117,17 +142,17 @@ app.get('/hats/:id', (req, res) => {
 
   res.send(hat);
 });
-  // hna mnach n9der n7adet hat product
+  // ======== UPDATE hat by id =======
   app.put('/hats/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const hat = hats.find(f => f.id === id);
 
-  // Vérification de l'existence
+  // takod
   if (!hat) {
     return res.status(404).json({ error: 'we dont have this product' });
   }
 
-  // Mise à jour des champs si fournis
+  // 
   const { photo, title, colore, prix } = req.body;
   if (photo) hat.photo = photo;
   if (title) hat.title = title;
@@ -136,33 +161,34 @@ app.get('/hats/:id', (req, res) => {
   res.json(hat);
 });
 
-// hna manch kanmse7 hat 
+// =========== DELETE hat by ID =========
 app.delete('/hats/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const index = hats.findIndex(f => f.id === id);
 
-  // Vérification de l'existence
+  // takod
   if (index === -1) {
     return res.status(404).json({ error: 'Formation non trouvée.' });
   }
 
-  // Suppression avec splice
+  // 
   const [deleted] = hats.splice(index, 1);
   res.json({ message: 'Formation supprimée.', hat: deleted });
 });
 
-
+// =========== GET page product-details ===========
 app.get('/product-details', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'product-details.html'));
 });
 
+// page ba9i makhdemtch 3liha
 app.get('/Hommes', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'Hommes.html'))
 })
 
 
 
-// Démarrage du serveur
-app.listen(3000, () => {
+// =========== RUN server ============
+app.listen(PORT, () => {
   console.log('Serveur démarré sur http://localhost:3000');
 });
